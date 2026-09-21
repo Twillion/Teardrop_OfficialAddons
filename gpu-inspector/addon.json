@@ -1,0 +1,13 @@
+{
+  "id": "teardrop.gpu-inspector",
+  "name": "GPU Inspector & Profiler",
+  "version": "1.0.0",
+  "author": "Teardrop Core Team",
+  "description": "Live frame profiling, pass metrics, WebGPU timestamp queries, and VRAM memory ledger.",
+  "apiVersion": 1,
+  "main": "editor.js",
+  "entryPoints": {
+    "editor": "editor.js"
+  },
+  "permissions": ["gpu", "render-graph"]
+}

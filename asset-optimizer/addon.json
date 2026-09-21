@@ -1,0 +1,13 @@
+{
+  "id": "teardrop.asset-optimizer",
+  "name": "3D Asset Auditor & Optimizer",
+  "version": "1.0.0",
+  "author": "Teardrop Core Team",
+  "description": "Audits 3D models for Draco, Meshopt, and KTX2/Basis Universal texture compression.",
+  "apiVersion": 1,
+  "main": "editor.js",
+  "entryPoints": {
+    "editor": "editor.js"
+  },
+  "permissions": ["filesystem"]
+}

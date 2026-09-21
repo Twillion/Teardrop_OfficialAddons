@@ -1,0 +1,24 @@
+{
+  "id": "teardrop.lighting",
+  "name": "Teardrop Advanced 3D Lighting",
+  "version": "1.0.0",
+  "author": "Teardrop Core Team",
+  "description": "Clustered Forward+ light assignment and cascaded shadow mapping.",
+  "apiVersion": 1,
+  "main": "editor.js",
+  "entryPoints": {
+    "editor": "editor.js",
+    "runtime": "runtime.js"
+  },
+  "permissions": ["gpu", "render-graph"],
+  "rendererContributions": [
+    {
+      "id": "teardrop-forward-plus",
+      "kind": "render-technique",
+      "apiVersion": 1,
+      "label": "Clustered Forward+",
+      "supportedBackends": ["webgpu", "webgl2"],
+      "fallback": "forward"
+    }
+  ]
+}

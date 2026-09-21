@@ -1,0 +1,13 @@
+{
+  "id": "teardrop.material-editor",
+  "name": "Material Graph Editor",
+  "version": "1.0.0",
+  "author": "Teardrop Core Team",
+  "description": "Visual node-based shader authoring for PBR and Unlit materials using the native MaterialCompiler.",
+  "apiVersion": 1,
+  "main": "editor.js",
+  "entryPoints": {
+    "editor": "editor.js"
+  },
+  "permissions": ["gpu"]
+}
