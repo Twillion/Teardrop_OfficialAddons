@@ -3,7 +3,7 @@
   "name": "Teardrop Advanced 3D Lighting",
   "version": "1.0.0",
   "author": "Teardrop Core Team",
-  "description": "Clustered Forward+ light assignment and cascaded shadow mapping.",
+  "description": "Forward+ pipeline adapter with safe fallback to the native forward renderer.",
   "apiVersion": 1,
   "main": "editor.js",
   "entryPoints": {
@@ -16,7 +16,7 @@
       "id": "teardrop-forward-plus",
       "kind": "render-technique",
       "apiVersion": 1,
-      "label": "Clustered Forward+",
+      "label": "Forward+ Adapter",
       "supportedBackends": ["webgpu", "webgl2"],
       "fallback": "forward"
     }

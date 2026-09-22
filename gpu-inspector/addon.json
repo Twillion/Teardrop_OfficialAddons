@@ -3,7 +3,7 @@
   "name": "GPU Inspector & Profiler",
   "version": "1.0.0",
   "author": "Teardrop Core Team",
-  "description": "Live frame profiling, pass metrics, WebGPU timestamp queries, and VRAM memory ledger.",
+  "description": "Live CPU/pass profiling and VRAM estimates, with GPU timings shown when the runtime supplies them.",
   "apiVersion": 1,
   "main": "editor.js",
   "entryPoints": {

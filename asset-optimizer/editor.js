@@ -1,27 +1,28 @@
-const React = require('react');
+const React = require("react");
+const { EditorPlugin } = require("@teardrop/editor-api");
 
-module.exports = class AssetOptimizerPlugin {
+module.exports = class AssetOptimizerPlugin extends EditorPlugin {
   onEnable(editor) {
-    editor.addCommand({
-      id: 'teardrop.audit-3d-assets',
-      label: 'Tools: 3D Asset Auditor',
+    this.addCommand({
+      id: "teardrop.audit-3d-assets",
+      label: "Tools: 3D Asset Auditor",
       run: () => {
-        if (typeof editor.openDock === 'function') {
-          editor.openDock('asset-optimizer');
+        if (typeof editor.openDock === "function") {
+          editor.openDock("asset-optimizer");
         }
-      },
+      }
     });
 
-    editor.addMenuItem({
-      path: 'Tools/3D Asset Auditor',
-      command: 'teardrop.audit-3d-assets',
+    this.addMenuItem({
+      path: "Tools/3D Asset Auditor",
+      command: "teardrop.audit-3d-assets"
     });
 
-    editor.addDock({
-      id: 'asset-optimizer',
-      title: '3D Asset Auditor',
-      slot: 'bottom',
-      render: () => React.createElement(AssetOptimizerPanel, { editor }),
+    this.addDock({
+      id: "asset-optimizer",
+      title: "3D Asset Auditor",
+      slot: "bottom",
+      render: () => React.createElement(AssetOptimizerPanel, { editor })
     });
   }
 
@@ -30,22 +31,62 @@ module.exports = class AssetOptimizerPlugin {
 
 function AssetOptimizerPanel({ editor }) {
   const gdjs = global.gdjs;
-  const target = gdjs && gdjs.CodecRegistryHelper
-    ? gdjs.CodecRegistryHelper.selectTextureTranscodeTarget()
-    : 'rgba32';
+  const target =
+    gdjs && gdjs.CodecRegistryHelper
+      ? gdjs.CodecRegistryHelper.selectTextureTranscodeTarget()
+      : "rgba32";
+  const registeredCodecIds =
+    gdjs && gdjs.assetCodecRegistry
+      ? new Set(
+          gdjs.assetCodecRegistry
+            .getDescriptors()
+            .map(descriptor => descriptor.id)
+        )
+      : new Set();
+  const codecs = [
+    ["Google Draco", "KHR_draco_mesh_compression"],
+    ["Meshopt", "EXT_meshopt_compression"],
+    ["KTX2 / Basis", "KHR_texture_basisu"]
+  ];
 
   return React.createElement(
-    'div',
-    { style: { padding: 16, fontFamily: 'sans-serif', fontSize: 13, height: '100%', overflow: 'auto' } },
-    React.createElement('h3', { style: { margin: '0 0 8px 0' } }, '3D Asset Compression & Codec Auditor'),
-    React.createElement('div', { style: { marginBottom: 12 } },
-      React.createElement('strong', null, 'Active Texture Transcode Target: '),
-      React.createElement('span', { style: { color: '#61afef', fontWeight: 'bold' } }, target.toUpperCase())
+    "div",
+    {
+      style: {
+        padding: 16,
+        fontFamily: "sans-serif",
+        fontSize: 13,
+        height: "100%",
+        overflow: "auto"
+      }
+    },
+    React.createElement(
+      "h3",
+      { style: { margin: "0 0 8px 0" } },
+      "3D Asset Compression & Codec Auditor"
     ),
-    React.createElement('ul', null,
-      React.createElement('li', null, 'Google Draco: Enabled (geometry vertex decompression)'),
-      React.createElement('li', null, 'Meshopt: Enabled (ultra-fast SIMD decompression)'),
-      React.createElement('li', null, 'KTX2 / Basis: Enabled (GPU-native hardware transcoding)')
+    React.createElement(
+      "div",
+      { style: { marginBottom: 12 } },
+      React.createElement("strong", null, "Active Texture Transcode Target: "),
+      React.createElement(
+        "span",
+        { style: { color: "#61afef", fontWeight: "bold" } },
+        target.toUpperCase()
+      )
+    ),
+    React.createElement(
+      "ul",
+      null,
+      ...codecs.map(([name, extension]) =>
+        React.createElement(
+          "li",
+          { key: extension },
+          `${name}: ${
+            registeredCodecIds.has(extension) ? "Registered" : "Unavailable"
+          } (${extension})`
+        )
+      )
     )
   );
 }

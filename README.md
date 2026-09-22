@@ -2,6 +2,8 @@
 
 Welcome to the official repository of first-party add-ons, editor tools, and renderer extensions for **Teardrop Engine**.
 
+Engine source: <https://github.com/Twillion/TeardropEngine>
+
 ---
 
 ## Included Add-ons
@@ -9,7 +11,7 @@ Welcome to the official repository of first-party add-ons, editor tools, and ren
 ### 1. `gpu-inspector`
 - **Identifier:** `teardrop.gpu-inspector`
 - **Type:** Editor Dock & Profiler
-- **Features:** Live frame CPU build/submission timers, sampled asynchronous WebGPU timestamp queries, per-pass breakdown, and format-based VRAM byte memory ledger.
+- **Features:** Live frame CPU build/submission timers, per-pass breakdown, format-based VRAM estimates, and GPU timings when supplied by the runtime.
 
 ### 2. `material-editor`
 - **Identifier:** `teardrop.material-editor`
@@ -24,7 +26,7 @@ Welcome to the official repository of first-party add-ons, editor tools, and ren
 ### 4. `teardrop-lighting`
 - **Identifier:** `teardrop.lighting`
 - **Type:** Runtime Technique & Editor Controls
-- **Features:** Clustered Forward+ light assignment and cascaded shadow mapping for complex 3D scenes.
+- **Features:** A Forward+ adapter that uses the engine lighting provider when available and safely falls back to the native forward pipeline.
 
 ---
 
